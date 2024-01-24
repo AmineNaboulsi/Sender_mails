@@ -110,6 +110,7 @@
     <Content Include="Resources\icons8_pdf_60.png" />
     <Content Include="Resources\icons8_excel_48.png" />
     <Content Include="Resources\icons8_image_50.png" />
+    <Content Include="Resources\Screenshot_app.png" />
     <None Include="Resources\-attach-file_90371.png" />
     <None Include="Resources\1486564399-close_81512.png" />
     <Content Include="Resources\fileinter.png" />
