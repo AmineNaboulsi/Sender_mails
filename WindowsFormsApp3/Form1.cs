@@ -25,7 +25,8 @@ namespace WindowsFormsApp3
         private void Form1_Load(object sender, EventArgs e)
         {
             emailcontant.Multiline = true;
-            
+            guna2TextBox1.Multiline = true;
+      
         }
         public DataTable ImportExcelToDataTable(string filePath)
         {
@@ -79,27 +80,14 @@ namespace WindowsFormsApp3
 
         }
 
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void General_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void sendemail_event_click(object sender, EventArgs e)
         {
+            bool F = false;
             foreach (RadioButton item in groupchoose.Controls)
             {
                 if (item.Checked && item.Text == "Filed text")
                 {
+                    errorProvider1.Clear();
                     if (lebel_smtp_user.Text.Length == 0)
                     {
                         errorProvider1.SetError(lebel_smtp_user , "required");
@@ -115,10 +103,11 @@ namespace WindowsFormsApp3
                     else
                     {
                         errorProvider1.Clear();
-                        send(lebel_smtp_email.Text);
-                        notifydone(lebel_smtp_email.Text);
+                        F = send(lebel_smtp_email.Text);
+                        if(F)
+                            notifydone(lebel_smtp_email.Text);
                     }
-                    
+
                 }
                 else if (item.Checked && item.Text == "File exel") {
                     if (txtindex.Text.Length == 0)
@@ -154,10 +143,11 @@ namespace WindowsFormsApp3
                 notifyIcon.Visible = true;
                 notifyIcon.BalloonTipTitle = "Done";
                 notifyIcon.BalloonTipText = "Task completed : mail sent successfully to " + ml;
-                notifyIcon.ShowBalloonTip(100);
+
+            notifyIcon.ShowBalloonTip(100);
         }
         Attachment attachment ;
-        public void send(string email )
+        public Boolean send(string email)
         {
             try
             {
@@ -198,30 +188,39 @@ namespace WindowsFormsApp3
                 // Send the email
                 smtpClient.Send(mail);
                 logstxt.Text += "Completed sending email to : " + email + "\n";
+                tabControl1.SelectedIndex = 1;
+                return true;
             }
             catch(Exception ex)
             {
                 labelerror.Text += ex.Message;
+                labelerror.ForeColor = Color.Red;
+                tabControl1.SelectedIndex = 2;
+                return false;
             }
            
         }
-
-        private void label7_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
         private void guna2ImageButton1_Click(object sender, EventArgs e)
         { // Use an OpenFileDialog to allow the user to select a file
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
                 openFileDialog.Title = "Select File to Attach";
                 openFileDialog.Filter = "All Files (*.*)|*.*";
+                openFileDialog.Multiselect = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     // Attach the selected file
-                    attachment = new Attachment(openFileDialog.FileName);
+                    try
+                    {
+                        attachment = new Attachment(openFileDialog.FileName);
+                       
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        return;
+                    }
                     files.Add(openFileDialog.FileName);
 
                 }
@@ -260,6 +259,24 @@ namespace WindowsFormsApp3
         private void lebel_smtp_email_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void emailcontant_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void emailcontant_Validating(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void bunifuButton1_Click(object sender, EventArgs e)
+        {
+            string htmlContent = guna2TextBox1.Text;
+
+            // Display HTML content in the WebBrowser control
+            webBrowser1.DocumentText = htmlContent;
         }
     }
 }
