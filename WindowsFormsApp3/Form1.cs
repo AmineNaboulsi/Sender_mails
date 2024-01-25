@@ -206,7 +206,6 @@ namespace WindowsFormsApp3
             {
                 openFileDialog.Title = "Select File to Attach";
                 openFileDialog.Filter = "All Files (*.*)|*.*";
-                openFileDialog.Multiselect = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
