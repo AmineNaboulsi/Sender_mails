@@ -11,7 +11,7 @@
 The Sender Mails App is a feature-rich application designed to simplify the process of sending emails to one or more recipients simultaneously. Whether you're communicating with colleagues, friends, or clients, this app provides a seamless and efficient solution for managing your email correspondence.
 
 <p align="center">
-    <img align="center" src="https://github.com/AmineNaboulsi/Sender_mails/blob/master/WindowsFormsApp3/Resources/Screenshot_app.png?raw=true" alt="Sender Mails App Screenshot">
+    <img align="center" src="https://raw.githubusercontent.com/AmineNaboulsi/Sender_mails/master/WindowsFormsApp3/Resources/Screenshot.png" alt="Sender Mails App Screenshot">
 </p>
 
 ## Features
